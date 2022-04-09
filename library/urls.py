@@ -16,6 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from books.views import get_hello, get_uuids_a, get_uuids_b
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', get_hello),
+    path('uuid-a', get_uuids_a),
+    path('uuid-b', get_uuids_b),
 ]
