@@ -49,16 +49,17 @@ def get_argument_from_query(request: WSGIRequest) -> HttpResponse:
 
 @csrf_exempt
 def check_http_query_type(request: WSGIRequest) -> HttpResponse:
-    query_type = 'unknown'
-    if request.method == 'GET':
-        query_type = 'This is GET'
-    elif request.method == 'POST':
-        query_type = 'This is POST'
-    elif request.method == 'PUT':
-        query_type = 'This is PUT'
-    elif request.method == 'DELETE':
-        query_type = 'This is DELETE'
-    return HttpResponse(query_type)
+    # query_type = 'unknown'
+    # if request.method == 'GET':
+    #     query_type = 'This is GET'
+    # elif request.method == 'POST':
+    #     query_type = 'This is POST'
+    # elif request.method == 'PUT':
+    #     query_type = 'This is PUT'
+    # elif request.method == 'DELETE':
+    #     query_type = 'This is DELETE'
+    # return HttpResponse(query_type)
+    return render(request, template_name='methods.html', context={})
 
 
 def get_headers(request: WSGIRequest) -> JsonResponse:
