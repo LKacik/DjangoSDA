@@ -23,8 +23,16 @@ def get_uuids_b(request: WSGIRequest) -> JsonResponse:
 
 
 def get_image(request: WSGIRequest) -> HttpResponse:
-    return HttpResponse('<img src="https://images.pexels.com/photos/9197509/pexels-photo-9197509.jpeg" width="800" height="600">')
+    return HttpResponse('<img src="https://images.pexels.com/photos/9197509/pexels-photo-9197509.jpeg" width="800" '
+                        'height="600">')
 
 
 def get_button(request: WSGIRequest) -> HttpResponse:
     return HttpResponse('<button type="button">Click Me!</button>')
+
+
+def get_argument_from_path(request: WSGIRequest, x: int, y: str, z: str) -> HttpResponse:
+
+
+    return HttpResponse(f"x= {x}, y= {y}, z= {z}")
+

@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from books.views import get_hello, get_uuids_a, get_uuids_b, get_image, get_button
+from books.views import get_hello, get_uuids_a, get_uuids_b, get_image, get_button, get_argument_from_path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +25,6 @@ urlpatterns = [
     path('uuid-b', get_uuids_b),
     path('image', get_image),
     path('button', get_button),
+    path('path-args/<int:x>/<str:y>/<slug:z>/', get_argument_from_path, name="get_from_path"),
 
 ]
