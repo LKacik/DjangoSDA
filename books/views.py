@@ -4,10 +4,20 @@ from django.core.exceptions import BadRequest
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
-
+from django.views import View
+from django.views.decorators.csrf import csrf_exempt
+from books.models import BookAuthor
 
 # Create your views here.
-from django.views.decorators.csrf import csrf_exempt
+
+
+
+class AuthorListBaseView(View):
+    template_name = "author_list.html"
+    queryset = BookAuthor.objects.all()  # type: ignore
+    def get(self, request: WSGIRequest, *args, **kwargs):
+        context = {'authors': self.queryset}
+        return render(request, template_name=self.template_name, context=context)
 
 
 def get_hello(request: WSGIRequest) -> HttpResponse:
@@ -75,3 +85,4 @@ def raise_error_for_fun(request: WSGIRequest) -> HttpResponse:
 
 def get_search_book(request: WSGIRequest) -> HttpResponse:
     return HttpResponse('https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyDf4PhS2UH9ql0Pj1ImpGXY5jpddg-ZQ1o')
+
