@@ -8,12 +8,11 @@ from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, DetailView, ListView
-
 from books.models import BookAuthor, Category, Book
-
+import logging
 
 # Create your views here.
-
+logger = logging.getLogger('lukasz')
 
 
 class AuthorListBaseView(View):
@@ -21,6 +20,7 @@ class AuthorListBaseView(View):
     queryset = BookAuthor.objects.all()  # type: ignore
 
     def get(self, request: WSGIRequest, *args, **kwargs):
+        logger.debug(f"{request} DUPA!")
         context = {'authors': self.queryset}
         return render(request, template_name=self.template_name, context=context)
 
