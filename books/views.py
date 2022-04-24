@@ -1,15 +1,15 @@
+from msilib.schema import ListView
 from uuid import uuid4
 
 from django.core.exceptions import BadRequest
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView, ListView
 
-from books.models import BookAuthor, Category
-
+from books.models import BookAuthor, Category, Book
 
 
 # Create your views here.
@@ -30,6 +30,18 @@ class CategoryListTemplateView(TemplateView):
     extra_context = {"categories": Category.objects.all()}
 
 
+class BooksListView(ListView):
+    template_name = 'books_list.html'
+    model = Book
+    paginate_by = 10
+
+
+class BookDetailsView(DetailView):
+    template_name = "book_detail.html"
+    model = Book
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Book, id=self.kwargs.get("pk"))
 
 
 
