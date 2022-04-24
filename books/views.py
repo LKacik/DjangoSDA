@@ -6,7 +6,11 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
-from books.models import BookAuthor
+from django.views.generic import TemplateView
+
+from books.models import BookAuthor, Category
+
+
 
 # Create your views here.
 
@@ -15,9 +19,19 @@ from books.models import BookAuthor
 class AuthorListBaseView(View):
     template_name = "author_list.html"
     queryset = BookAuthor.objects.all()  # type: ignore
+
     def get(self, request: WSGIRequest, *args, **kwargs):
         context = {'authors': self.queryset}
         return render(request, template_name=self.template_name, context=context)
+
+
+class CategoryListTemplateView(TemplateView):
+    template_name = 'category_list.html'
+    extra_context = {"categories": Category.objects.all()}
+
+
+
+
 
 
 def get_hello(request: WSGIRequest) -> HttpResponse:
