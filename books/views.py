@@ -73,3 +73,5 @@ def raise_error_for_fun(request: WSGIRequest) -> HttpResponse:
         raise BadRequest('method not allowed')
     return HttpResponse('wszystko ok')
 
+def get_search_book(request: WSGIRequest) -> HttpResponse:
+    return HttpResponse('https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyDf4PhS2UH9ql0Pj1ImpGXY5jpddg-ZQ1o')

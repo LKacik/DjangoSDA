@@ -1,7 +1,7 @@
 from django.urls import path
 
 from books.views import get_uuids_a, get_uuids_b, get_image, get_button, get_argument_from_path, \
-    get_argument_from_query, check_http_query_type, get_headers, raise_error_for_fun
+    get_argument_from_query, check_http_query_type, get_headers, raise_error_for_fun, get_search_book
 
 urlpatterns = [
     path('uuid-a', get_uuids_a),
@@ -13,6 +13,7 @@ urlpatterns = [
     path('path-type', check_http_query_type, name="check_http_query_type"),
     path('get-headers', get_headers, name="get_headers"),
     path('raise-error', raise_error_for_fun, name="raise_error_for_fun"),
+    path('search_book', get_search_book),
 
 ]
 
