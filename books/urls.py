@@ -19,6 +19,7 @@ urlpatterns = [
     path('author-list', AuthorListBaseView.as_view(), name='author_list'),
     path('category-list', CategoryListTemplateView.as_view(), name='category_list'),
     path('books-list', BooksListView.as_view(), name='books_list'),
+    path('book-create', BookDetailsView.as_view(), name='book_create'),
     path('book-details/<int:pk>', BookDetailsView.as_view(), name='books_details'),
     path('category-create', CategoryCreateFormView.as_view(), name='category_create'),
     path('author-create', AuthorCreateView.as_view(), name='author_create'),

@@ -5,6 +5,7 @@ from books.models import BookAuthor, Book
 
 logger = logging.getLogger('formsLogger')
 
+
 class CategoryForm(Form):
     name = CharField(max_length=156, required=True)
 

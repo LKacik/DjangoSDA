@@ -10,7 +10,7 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, DetailView, ListView, FormView, CreateView, UpdateView
 
-from books.forms import CategoryForm, AuthorForm
+from books.forms import CategoryForm, AuthorForm, BookForm
 from books.models import BookAuthor, Category, Book
 import logging
 
@@ -64,10 +64,12 @@ class CategoryCreateFormView(FormView):
         logger.info(f"check_entity-id={check_entity.id}")
         return result
 
+
 class AuthorCreateView(CreateView):
     template_name = 'author_form.html'
     form_class = AuthorForm
     success_url = reverse_lazy('author_list')
+
 
 class AuthorUpdateView(UpdateView):
     template_name = 'author_form.html'
@@ -77,6 +79,11 @@ class AuthorUpdateView(UpdateView):
     def get_object(self, **kwargs):
         return get_object_or_404(BookAuthor, id=self.kwargs.get("pk"))
 
+
+class BookCreateView(CreateView):
+    templates_name = 'book_form.html'
+    form_class = BookForm
+    success_url = reverse_lazy('books_list')
 
 
 def get_hello(request: WSGIRequest) -> HttpResponse:
@@ -141,6 +148,7 @@ def raise_error_for_fun(request: WSGIRequest) -> HttpResponse:
     if request.method != 'GET':
         raise BadRequest('method not allowed')
     return HttpResponse('wszystko ok')
+
 
 def get_search_book(request: WSGIRequest) -> HttpResponse:
     return HttpResponse('https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyDf4PhS2UH9ql0Pj1ImpGXY5jpddg-ZQ1o')
