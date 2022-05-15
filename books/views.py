@@ -1,6 +1,7 @@
 from msilib.schema import ListView
 from uuid import uuid4
 
+from django.contrib.auth.decorators import login_required
 from django.core.exceptions import BadRequest, PermissionDenied
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
@@ -104,15 +105,15 @@ class BookDeleteView(DeleteView):
     def get_object(self, **kwargs):
         return get_object_or_404(Book, id=self.kwargs.get("pk"))
 
-
+@login_required
 def get_hello(request: WSGIRequest) -> HttpResponse:
     user: Users = request.user  # type: ignore
     # password = None if user.is_anonymous else user.password
     # email = None if user.is_anonymous else user.email
     # date_joined = None if user.is_anonymous else user.date_joined
-    if not user.is_authenticated:
+    #if not user.is_authenticated:
         # raise PermissionDenied()
-        return HttpResponseRedirect(reverse('login'))
+        #return HttpResponseRedirect(reverse('login'))
     is_auth: bool = user.is_authenticated
     hello = f'Hello user name {user} your password is {user.password}, your email {user.email} and date joined :{user.date_joined}'
 
