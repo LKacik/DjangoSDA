@@ -21,8 +21,9 @@ from books.views import get_hello
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('', get_hello),
+    path('', get_hello, name='home'),
     path('books/', include('books.urls')),
+    path('users/', include('users.urls')),
     # path('uuid-a', get_uuids_a),
     # path('uuid-b', get_uuids_b),
     # path('image', get_image),
